@@ -5,7 +5,7 @@ export type Gif = {
     trending_datetime: string;
     rating: string;
     images: {
-      downsized: {
+      downsized_large: {
         url: string;
       };
     };

@@ -1,9 +1,9 @@
 <template>
     <div class="px-4 sm:px-6">
         <div class="flex place-content-center items-center mt-5">
-            <input class="mr-2 px-3 py-1 rounded-md" v-model="query" @input="handleInput" placeholder="Search GIFs" />
+            <input class="mr-2 px-3 py-1 rounded-md" v-model="query" @input="handleInput" @keyup.enter="onEnterPress" placeholder="Search GIFs" />
 
-            <Filter @resetFilter="resetFilter" @applyFilter="applyFilter" />
+            <Filter class="mr-2" @resetFilter="resetFilter" @applyFilter="applyFilter" />
             <Sorting @sort="handleSort" />
         </div>
 
@@ -20,16 +20,21 @@
             <div v-if="isLoading">Loading...</div>
 
             <div v-if="filteredGifs.length" ref="scrollComponent"
-                class="mt-4 w-full max-w-screen-lg grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 sm: gap-2 md:gap-3 lg:gap-5">
+                class="mt-4 max-w-screen-lg grid grid-cols-2 gap-2 md:grid-cols-4 lg:grid-cols-6 md:gap-3 lg:gap-5">
                 <div class="flex items-center bg-white p-2 rounded-md" v-for="gif in filteredGifs" :key="gif.id">
-                    <img :src="gif.images.downsized.url" loading="lazy" :alt="gif.title" class="w-full h-auto" />
+                    <img :src="gif.images.downsized_large.url" loading="lazy" :alt="gif.title" class="w-full" />
                 </div>
             </div>
 
             <div v-else-if="!gifs.length && !isLoading" class="flex place-self-center">
                 <p class="text-xl">No results</p>
             </div>
+            <div v-else-if="!filteredGifs.length && !isLoading" class="flex place-self-center">
+                <p class="text-xl">Filter has no results</p>
+            </div>
         </div>
+
+        <button v-if="filteredGifs.length" class="flex place-self-center" @click="loadMore(query)"> Load more </button>
     </div>
 </template>
 
@@ -47,6 +52,11 @@ const scrollComponent = ref()
 const sortKey = ref<'import_datetime' | 'trending_datetime'>('trending_datetime');
 const sortOrder = ref<string>('desc');
 const selectedFilters = ref<string[]>([]);
+
+const onEnterPress = () => {
+    autocompleteSuggestions.value = [];
+    queryGifs(query.value);
+};
 
 const handleInput = () => {
     resetSearch();

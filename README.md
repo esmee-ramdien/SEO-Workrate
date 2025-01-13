@@ -69,12 +69,16 @@ I initially considered using **TanStack**, since it was a requirement, but **Tan
 
 For styling, **Flowbite** was chosen due to its lightweight nature, making it perfect for a project of this size. In larger projects, I would opt for more robust frameworks such as **Bulma**, **PrimeVue**, **Bootstrap**, or similar alternatives, depending on the project’s needs.
 
+For this project, I have chosen to build a simple UI just to showcase the core functionality. In a full production application, more attention should be given to complex UI components, user interaction patterns, and detailed styling.
+
 ### API Handling
 
 I am a strong proponent of using SDKs as they help with writing cleaner code and better development practices. However, the **Giphy SDK** did not cover all the required endpoints for this project, so I had to use **Axios** to handle the API calls.
 
 ### Project Structure 
 For larger projects, I would consider separating the frontend and backend into separate repositories. This structure would help in organizing the codebase more effectively. A separate backend also allows for easier scaling of different technologies for the server-side.
+
+Security-wise, it's bad practice to make API calls to Giphy directly from the frontend, because the API key could get compromised. Splitting the frontend and backend would prevent keys from leaking.
 
 But for this project I created a folder 'composables', which technically separates the frontend from the backend.
 

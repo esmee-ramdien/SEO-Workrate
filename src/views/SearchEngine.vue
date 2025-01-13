@@ -43,7 +43,9 @@ import Sorting from '../components/Sorting.vue';
 import Filter from '../components/Filter.vue';
 import type { SortingParams } from '../@types/sorting';
 import { ref, computed, onMounted, onUnmounted } from 'vue';
-import { gifs, isLoading, queryGifs, loadMore, resetSearch, fetchAutocompleteSuggestions } from '@/src/composables/giphy';
+import { useGiphy } from '@/src/composables/giphy';
+
+const { queryGifs, loadMore, resetSearch, fetchAutocompleteSuggestions, gifs, isLoading } = useGiphy();
 
 const query = ref('');
 const autocompleteSuggestions = ref<string[]>([]);
@@ -99,8 +101,7 @@ const resetFilter = () => {
 }
 
 const handleScroll = () => {
-    let element = scrollComponent.value;
-    if (element.getBoundingClientRect().bottom < window.innerHeight) {
+    if (scrollComponent.value.getBoundingClientRect().bottom < window.innerHeight) {
         loadMore(query.value);
     }
 };

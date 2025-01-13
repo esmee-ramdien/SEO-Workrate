@@ -1,15 +1,14 @@
 <template>
     <div class="relative flex items-center">
-        <button @click="toggleSortingModal" class="inline-flex items-center bg-inherit focus:ring-4" type="button">
+        <button @click="toggleSortingModal" class="bg-inherit focus:ring-4" type="button">
             <img src="@/src/assets/icons/sorting.svg" alt="Sort" class="w-6 h-6" />
         </button>
 
-        <div v-show="isSortingOptionsVisible" class="modal">
-            <p class="flex place-self-center py-1 font-bold text-lg"> Sort by: </p>
+        <div v-show="isSortingOptionsVisible" class="modal flex justify-center flex-col"">
+            <p class=" py-1 font-bold text-lg"> Sort by: </p>
 
             <ul class="py-2 text-sm text-gray-700 w-full">
                 <li v-for="option in sortingOptions" :key="option.key"
-                    :class="{ 'bg-slate-300': selectedKey === option.key, 'bg-white': selectedKey !== option.key }"
                     class="flex items-center">
                     <span @click="toggleSort(option.key)" class="px-4 py-2 w-full md:hover:bg-gray-100">
                         {{ option.label }}
@@ -20,9 +19,12 @@
                     </span>
                 </li>
             </ul>
-            <button @click="toggleSortingModal"class="flex place-self-center items-center place-content-center bg-slate-200 size-8">
-                <img src="@/src/assets/icons/close.svg" alt="Sort" class="w-2" />
-            </button>
+            <div class="p-2">
+                <button @click="toggleSortingModal"
+                    class="flex place-self-center items-center place-content-center bg-slate-200 size-8">
+                    <img src="@/src/assets/icons/close.svg" alt="Sort" class="w-2" />
+                </button>
+            </div>
         </div>
 
     </div>

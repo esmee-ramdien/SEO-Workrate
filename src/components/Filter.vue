@@ -1,11 +1,11 @@
 <template>
     <div class="relative flex items-center">
-        <button @click="toggleFilterModal" class="inline-flex bg-inherit items-center focus:ring-4" type="button">
+        <button @click="toggleFilterModal" class="bg-inherit focus:ring-4" type="button">
             <img src="@/src/assets/icons/filter.svg" alt="Sort" class="w-6 h-6" />
         </button>
 
-        <div v-show="isFiltersVisible" class="modal">
-            <p class="flex place-self-center py-1 font-bold text-lg"> MPAA Ratings </p>
+        <div v-show="isFiltersVisible" class="modal flex justify-center flex-col">
+            <p class="py-1 font-bold text-lg"> MPAA Ratings </p>
             <ul class="p-3 space-y-3 text-sm text-gray-700">
                 <li v-for="(rating, index) in MPAA" :key="rating.abbr">
                     <div class="flex items-center">

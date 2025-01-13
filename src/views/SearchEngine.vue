@@ -1,5 +1,5 @@
 <template>
-    <div class="px-4 sm:px-6">
+    <div class="flex flex-col items-center place-content-center px-4 sm:px-6">
         <div class="flex place-content-center items-center mt-5">
             <input class="mr-2 px-3 py-1 rounded-md" v-model="query" @input="handleInput" @keyup.enter="onEnterPress" placeholder="Search GIFs" />
 
@@ -7,7 +7,7 @@
             <Sorting @sort="handleSort" />
         </div>
 
-        <div class="flex place-self-center">
+        <div>
             <ul v-if="autocompleteSuggestions.length && !isLoading" class="mt-1 bg-white border rounded-md">
                 <li v-for="suggestion in autocompleteSuggestions" :key="suggestion"
                     class="px-3 py-2 hover:bg-gray-200 cursor-pointer" @click="selectSuggestion(suggestion)">
@@ -16,7 +16,7 @@
             </ul>
         </div>
 
-        <div class="flex place-self-center my-5">
+        <div class="my-5">
             <div v-if="isLoading">Loading...</div>
 
             <div v-if="filteredGifs.length" ref="scrollComponent"
@@ -26,15 +26,15 @@
                 </div>
             </div>
 
-            <div v-else-if="!gifs.length && !isLoading" class="flex place-self-center">
+            <div v-else-if="!gifs.length && !isLoading">
                 <p class="text-xl">No results</p>
             </div>
-            <div v-else-if="!filteredGifs.length && !isLoading" class="flex place-self-center">
+            <div v-else-if="!filteredGifs.length && !isLoading">
                 <p class="text-xl">Filter has no results</p>
             </div>
         </div>
 
-        <button v-if="filteredGifs.length" class="flex place-self-center" @click="loadMore(query)"> Load more </button>
+        <button v-if="filteredGifs.length" class="w-fit" @click="loadMore(query)"> Load more </button>
     </div>
 </template>
 

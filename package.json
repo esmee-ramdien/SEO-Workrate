@@ -10,8 +10,6 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "@giphy/js-fetch-api": "^5.6.0",
-    "@trevoreyre/autocomplete-vue": "^3.0.3",
     "axios": "^1.7.9",
     "flowbite": "^2.5.2",
     "nuxt": "^3.15.0",
